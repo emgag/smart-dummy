@@ -15,12 +15,12 @@ class cmd {
 
 const init = function(){
     const logPrefix = '[Smart Dummy] ';
+    const map = window._sasDummy || {};
 
     console.log(logPrefix + 'Initialize');
 
-    if(typeof window._sasDummy === 'undefined'){
-        console.log(logPrefix + 'No dummy config found... giving up');
-        return;
+    if(Object.keys(map).length === 0){
+        console.log(logPrefix + "Warning: format map (_sasDummy) not found or empty")
     }
 
     window.sas = {
@@ -40,13 +40,13 @@ const init = function(){
         render: function(format){
             console.log(logPrefix + 'render(' + format  + ') called, rendering format');
 
-            if(!window._sasDummy.hasOwnProperty(format)){
+            if(!map.hasOwnProperty(format)){
                 console.log(logPrefix + 'render(' + format  + ') ignored: format config not found');
                 return;
             }
 
             let img = document.createElement('img');
-            img.setAttribute('src', window._sasDummy[format]);
+            img.setAttribute('src', map[format]);
 
             let e = document.getElementById('sas_' + format);
 
