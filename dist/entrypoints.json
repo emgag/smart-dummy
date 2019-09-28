@@ -1,0 +1,9 @@
+{
+  "entrypoints": {
+    "smart": {
+      "js": [
+        "/dist/smart.js"
+      ]
+    }
+  }
+}

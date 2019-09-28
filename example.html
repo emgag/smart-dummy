@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <script>
+        var _sasDummy = {
+            1: 'https://dummyimage.com/50x50/555555/ffffff&text=Format+1',
+            2: 'https://dummyimage.com/50x50/555555/ffffff&text=Format+2',
+            3: 'https://dummyimage.com/50x50/555555/ffffff&text=Format+3',
+        }
+    </script>
+    <script src="/dist/smart.js" async></script>
+    <script>
+        var sas = sas || {};
+        sas.cmd = sas.cmd || [];
+        sas.cmd.push(function() {
+            sas.setup({ networkid: 666, domain: 'https://example.org', async: true });
+        });
+        sas.cmd.push(function() {
+            sas.call('onecall', { siteId: 1, pageId: 1, formatId: '1,2,3,4', target: 'keywords'});
+        });
+    </script>
+</head>
+<body>
+
+<!-- prerendered (one call) ad -->
+<div id="sas_1"></div>
+<script>sas.cmd.push(function(){ sas.render('1'); });</script>
+
+<!-- std call -->
+<div id="sas_2"></div>
+<script>sas.cmd.push(function(){ sas.call('std', { formatId: 2 }); });</script>
+
+<!-- invalid container -->
+<div id="sas_3x"></div>
+<script>sas.cmd.push(function(){ sas.render('3'); });</script>
+
+<!-- unknown format -->
+<div id="sas_666"></div>
+<script>sas.cmd.push(function(){ sas.render('666'); });</script>
+
+</body>
+</html>
