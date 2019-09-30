@@ -7,8 +7,11 @@ Simply reference the dummy smart.js instead of `https://ced.sascdn.com/tag/ID/sm
 ```html
 <script>
     var _sasDummy = {
-        1: 'https://example.org/format1.png',
-        2: 'https://example.org/format2.png'
+        debug: true,
+        formats: {
+            1: 'https://example.org/format1.png',
+            2: 'https://example.org/format2.png'        
+        }
     }
 </script>
 <script src="/dist/smart.js" async></script>

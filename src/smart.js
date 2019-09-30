@@ -13,35 +13,51 @@ class cmd {
     }
 }
 
+const log = function(msg, context){
+    if(typeof window._sasDummy === 'undefined' || !window._sasDummy.debug){
+        return;
+    }
+
+    const logPrefix = '[Smart Dummy] ';
+
+    if(context){
+        console.log(logPrefix + msg, context);
+        return;
+    }
+
+    console.log(logPrefix + msg);
+};
+
 const init = function(){
     const logPrefix = '[Smart Dummy] ';
-    const map = window._sasDummy || {};
+    const config = window._sasDummy || {};
+    const map = window._sasDummy.formats || {};
 
-    console.log(logPrefix + 'Initialize');
+    log('Initialize');
 
     if(Object.keys(map).length === 0){
-        console.log(logPrefix + "Warning: format map (_sasDummy) not found or empty")
+        log("Warning: format map (_sasDummy) not found or empty")
     }
 
     window.sas = {
         cmd: new cmd(window.sas.cmd),
         setup: function(config){
-            console.log(logPrefix + 'setup() called with config', config);
+            log('setup() called with config', config);
         },
         call: function(type, config){
             if(type === 'std'){
-                console.log(logPrefix + 'call(std) called with config', config, 'dispatching to to render()');
+                log('call(std) called with config', config, 'dispatching to to render()');
                 window.sas.render(config.formatId);
                 return;
             }
 
-            console.log(logPrefix + 'call(' + type  + ') called with config', config);
+            log('call(' + type  + ') called with config', config);
         },
         render: function(format){
-            console.log(logPrefix + 'render(' + format  + ') called, rendering format');
+            log('render(' + format  + ') called, rendering format');
 
             if(!map.hasOwnProperty(format)){
-                console.log(logPrefix + 'render(' + format  + ') ignored: format config not found');
+                log('render(' + format  + ') ignored: format config not found');
                 return;
             }
 
@@ -51,7 +67,7 @@ const init = function(){
             let e = document.getElementById('sas_' + format);
 
             if(!e){
-                console.log(logPrefix + 'render(' + format  + ') failed: sas_' + format + ' container not found');
+                log('render(' + format  + ') failed: sas_' + format + ' container not found');
                 return;
             }
 
