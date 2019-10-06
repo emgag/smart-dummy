@@ -21,11 +21,11 @@ const log = function(msg, context){
     const logPrefix = '[Smart Dummy] ';
 
     if(context){
-        console.log(logPrefix + msg, context);
+        console.log(logPrefix, msg, context);
         return;
     }
 
-    console.log(logPrefix + msg);
+    console.log(logPrefix, msg);
 };
 
 const init = function(){
