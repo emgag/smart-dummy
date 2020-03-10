@@ -72,6 +72,9 @@ const init = function(){
             }
 
             e.appendChild(img);
+        },
+        setGdprConsentData: function(consent){
+            log('setGdprConsentData() called with consent string', consent)
         }
     };
 
